@@ -1,0 +1,9 @@
+node_modules
+
+.dockerignore
+
+.env
+.env.dummy
+
+readme.md
+package-lock.json
