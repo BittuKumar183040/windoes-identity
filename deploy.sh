@@ -33,8 +33,8 @@ echo "▶ Stopping old container (if exists)..."
 podman stop "$CONTAINER_NAME" 2>/dev/null || true
 podman rm "$CONTAINER_NAME" 2>/dev/null || true
 
-echo "▶ Running new container on port $PORT → 80..."
-podman run -d --name "$CONTAINER_NAME" --restart=always --env-file "$ENV_FILE" -p "${PORT}:80" "$IMAGE_TAG"
+echo "▶ Running new container on port $PORT → 8081"
+podman run -d --name "$CONTAINER_NAME" --restart=always --env-file "$ENV_FILE" -p "${PORT}:8081" "$IMAGE_TAG"
 
 echo "▶ Cleaning old images..."
 podman image prune -f
