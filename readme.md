@@ -9,29 +9,40 @@ It handles:
 * User status management
 * Database schema migrations using **Knex**
 ---
+<img width="941" height="658" alt="image" src="https://github.com/user-attachments/assets/62e98df1-11cd-452d-812a-4116cbdb0f1d" />
 
-### Documentation
+### Documentation and Swagger
 
 #### Users
 
->🔵 **GET** `/users` - Get all users
+🔵 **GET** `/users` - Get all users
+
 🟢 **POST** `/users`- Create a new user
+
 🔵 **GET** `/users/keyword/{keyword}` - Get user information by **ID**, **username**, or **email**
+
 🔵 **GET** `/users/id/{id}` - Get user by ID
+
 🟠 **PUT** `/users/id/{id}/update-username` - Update username using user ID
 
 #### Files
 
->🟢 **POST** `/users/id/{id}/file/upload` - Upload user file *(profile picture / wallpaper)*
+🟢 **POST** `/users/id/{id}/file/upload` - Upload user file *(profile picture / wallpaper)*
+
 🔵 **GET** `/users/id/{id}/file/{fileTag}` - Get user files by **tag** and **status**
+
 🔵 **GET** `/users/id/{id}/file/{fileTag}/download` - Download user file by tag - Defaults to `ACTIVE` if status is missing or invalid
+
 🔵 **GET** `/users/id/{id}/file/fileId/{fileId}/download` - Download file using **fileId** and **userId**
 
 #### Auth
 
->🟢 **POST** `/auth/login` - Authenticate user using **username/email + password** - Issues **JWT auth token**
+🟢 **POST** `/auth/login` - Authenticate user using **username/email + password** - Issues **JWT auth token**
+
 🟢 **POST** `/auth/login/pin` - Authenticate user using **username/email + PIN** - Issues **JWT auth token**
+
 🟠 **PUT** `/auth/login/pin` - Update user PIN using **short-lived PIN update token**
+
 🟢 **POST** `/auth/login/id/{id}/password/verify` - Verify password and issue **short-lived PIN update token** - Token validity: **5 minutes**
 
 ---
@@ -117,4 +128,3 @@ npx knex migrate:make create_users_table
 npx knex migrate:latest
 ```
 ---
-
