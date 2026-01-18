@@ -1,6 +1,6 @@
 import logger from "#logger";
 import express from "express";
-import { listAllUsers, retriveUserById, retriveUserByPk, createUser, updateUsername } from "../service/userService.js";
+import { listAllUsers, retriveUserById, retriveUserByPk, createUser, updateUsername, checkUsernameExists } from "../service/userService.js";
 
 const router = express.Router();
 
@@ -41,6 +41,28 @@ router.get("/keyword/:keyword", async (req, res) => {
   try {
     const user = await retriveUserByPk(keyword)
     res.status(200).json(user);
+  } catch (err) {
+    logger.error(`Error: ${err} `)
+    if (err.status) {
+      return res.status(err.status).json({ error: err.error });
+    }
+    return res.status(500).json({ err: "Something went wrong, while getting user." });
+  }
+});
+
+router.get("/username/:username/check", async (req, res) => {
+  const { username } = req.params;
+  if (username.length < 1) { return res.status(400).json({ error: "Username or Email is required"}) }
+  try {
+    const user = await checkUsernameExists(username)
+    
+    return res.status(200).json({
+      available: !user,
+      message: user
+        ? "Username already taken"
+        : "Username is available",
+    });
+    
   } catch (err) {
     logger.error(`Error: ${err} `)
     if (err.status) {
