@@ -1,6 +1,7 @@
 
 import mlogger from 'morgan';
 import express from 'express';
+import cors from 'cors';
 import 'express-async-errors';
 import logger  from '#logger';
 import cookieParser from 'cookie-parser';
@@ -22,6 +23,7 @@ const swaggerSpec = {
 };
 
 let app = express();
+app.use(cors());
 app.use('/identity-service/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(mlogger('dev'));

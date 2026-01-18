@@ -29,7 +29,7 @@ exports.up = function (knex) {
         username: 'admin',
         name: 'System Administrator',
         email: 'admin@system.com',
-        passwordHash: '$2b$10$BS29wCH8KwDkr.385eZEDOyN7NifdoArrv2AuojHSerBBgLcGZLv.', // SecurePass123!
+        passwordHash: '$2b$10$av.VnHybuvoIOWv4c64VGuiShR28Ih3FqEtgfqKj522EUdZwvuzam', // SecurePass123!
         status: 'ACTIVE',
         createdAt: Math.floor(Date.now() / 1000),
         updatedAt: Math.floor(Date.now() / 1000)

@@ -37,7 +37,7 @@ router.get("/id/:id", async (req, res) => {
 
 router.get("/keyword/:keyword", async (req, res) => {
   const { keyword } = req.params;
-  if (!keyword) { return res.status(400).json({ error: "Id or Username or Email is Required as keyword"}) }
+  if (keyword.length < 1) { return res.status(400).json({ error: "Username or Email is required"}) }
   try {
     const user = await retriveUserByPk(keyword)
     res.status(200).json(user);
