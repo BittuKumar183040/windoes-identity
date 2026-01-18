@@ -1,22 +1,22 @@
 import db from "../../utility/db/knex/knex.js";
 
-export const insertFileRecord = async ({ user_id, file_tag, filename }) => {
+export const insertFileRecord = async ({ userId, fileTag, filename }) => {
   const [file] = await db("files")
-    .insert({ user_id, file_tag, filename, status: "ACTIVE", updatedAt: Math.floor(Date.now() / 1000) })
+    .insert({ userId, fileTag, filename, status: "ACTIVE", updatedAt: Math.floor(Date.now() / 1000) })
     .returning("*");
   return file;
 };
 
-export const updateUserFileStatus = async ({ user_id, file_tag, status }) => {
+export const updateUserFileStatus = async ({ userId, fileTag, status }) => {
   const updatedCount = await db("files")
-    .where({ user_id, file_tag })
+    .where({ userId, fileTag })
     .update({ status });
   return updatedCount;
 };
 
-export const getUserFilesDetails = async ({ user_id, file_tag, status }) => {
+export const getUserFilesDetails = async ({ userId, fileTag, status }) => {
   return db("files")
-    .where({ user_id, file_tag })
+    .where({ userId, fileTag })
     .whereIn("status", status)
     .orderBy("updatedAt", "desc")
     .select("*");
@@ -24,7 +24,7 @@ export const getUserFilesDetails = async ({ user_id, file_tag, status }) => {
 
 export const getFilebyFileAndUserId = async ({fileId, userId}) => {
   return db("files")
-    .where({ id: fileId, user_id:userId })
+    .where({ id: fileId, userId:userId })
     .select("*")
     .first();
 }

@@ -19,16 +19,16 @@ export const uploadFile = async ({ id, fileTag, file }) => {
   }
 
   fs.writeFileSync(filePath, file.buffer);
-  const resetStatusCount = await updateUserFileStatus({ user_id: id, file_tag: fileTag, status: "INACTIVE" })
+  const resetStatusCount = await updateUserFileStatus({ userId: id, fileTag: fileTag, status: "INACTIVE" })
   logger.info(`Reset already exists images count: ${resetStatusCount} back to inactive for user:${id}`)
 
-  const fileRecord = await insertFileRecord({ user_id: id, file_tag: fileTag, filename });
+  const fileRecord = await insertFileRecord({ userId: id, fileTag: fileTag, filename });
   logger.info(`File uploaded successfully for User Id ${id}, File Tag:${fileTag}, filePath:${filePath}, filename:${filename} `);
   return fileRecord;
 };
 
 export const getFile = async ({ id, fileTag, statuses }) => {
-  let fileRecord = await getUserFilesDetails({user_id: id, file_tag: fileTag, status: statuses})
+  let fileRecord = await getUserFilesDetails({userId: id, fileTag: fileTag, status: statuses})
 
   if (!fileRecord || !fileRecord.length) {
     throw { status: 404, error:`No File found for user ${id}, tag ${fileTag} and status ${[...statuses]}`}
@@ -52,7 +52,7 @@ const getFileByEntity = async (fileRecord) => {
 
   const rootFolder = process.env.ROOT_FOLDER || "/data";
   logger.info(`Getting file from - Root:${rootFolder}, ${JSON.stringify(fileRecord)}`)
-  const location = path.join(rootFolder, fileRecord.user_id, fileRecord.file_tag, fileRecord.filename);
+  const location = path.join(rootFolder, fileRecord.userId, fileRecord.fileTag, fileRecord.filename);
 
   logger.info(`Looking into Location: ${location}`)
   

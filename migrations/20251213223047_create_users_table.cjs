@@ -14,9 +14,9 @@ exports.up = function (knex) {
     .then(() => {
       return knex.schema.createTable('files', (table) => {
         table.string('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
-        table.string('user_id').notNullable();
-        table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE');
-        table.string('file_tag', 50).notNullable();
+        table.string('userId').notNullable();
+        table.foreign('userId').references('id').inTable('users').onDelete('CASCADE');
+        table.string('fileTag', 50).notNullable();
         table.string('filename', 255).notNullable();
         table.string('status', 50).notNullable().defaultTo('ACTIVE');
         table.integer('createdAt').notNullable().defaultTo(knex.raw("EXTRACT(EPOCH FROM NOW())::INTEGER"));

@@ -50,7 +50,7 @@ router.get("/id/:id/file/:fileTag", async (req, res) => {
       throw { status: 422, error: `Invalid status value(s): ${invalid.join(", ")}. Accepted Status: ${[...ALLOWED_STATUS]}`};
     }
 
-    const files = await getUserFilesDetails({ user_id: id, file_tag: fileTag, status });
+    const files = await getUserFilesDetails({ userId: id, fileTag: fileTag, status });
 
     return res.status(200).json(files);
 

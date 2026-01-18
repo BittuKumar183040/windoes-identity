@@ -71,11 +71,11 @@
             "type": "string",
             "example": "8f2b9e4e-8a45-4c63-9e44-acde12345678"
           },
-          "user_id": {
+          "userId": {
             "type": "string",
             "example": "admin"
           },
-          "file_tag": {
+          "fileTag": {
             "$ref": "#/components/schemas/FileTag"
           },
           "filename": {
