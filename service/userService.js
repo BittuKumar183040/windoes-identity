@@ -13,6 +13,8 @@ export const retriveUserById = async (userId) => {
   return user;
 }
 
+
+
 export const checkUsernameExists = async (username) => {
   const user = await getUserByUsername(username)
   logger.info(`${JSON.stringify(user)}`)

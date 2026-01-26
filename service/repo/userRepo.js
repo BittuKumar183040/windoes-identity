@@ -1,4 +1,3 @@
-import logger from '#logger';
 import db from '../../utility/db/knex/knex.js';
 import { hashPassword } from '../../utility/passwordHelper.js';
 
@@ -65,7 +64,6 @@ export const findUserByIdUsernameOrEmail = async (keyword) => {
     .first();
 };
 
-// internal user only
 export const getUserWithPin = async (usernameOrEmail) => {
   return await db('users')
     .select([...userInternal])
