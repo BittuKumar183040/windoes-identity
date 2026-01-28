@@ -3,7 +3,7 @@ set -e
 
 APP_NAME="identity"
 CONTAINER_NAME="windoes-identity"
-ENV_FILE="/home/bk183040/windoes/windoes-identity/.env"
+ENV_FILE=".env"
 
 if [ -f "$ENV_FILE" ]; then
   export $(grep -v '^#' "$ENV_FILE" | xargs)
@@ -34,7 +34,7 @@ podman stop "$CONTAINER_NAME" 2>/dev/null || true
 podman rm "$CONTAINER_NAME" 2>/dev/null || true
 
 echo "▶ Running new container on port $PORT → 8081"
-podman run -d --name "$CONTAINER_NAME" --network windoes-net --restart=always --env-file "$ENV_FILE" -e ROOT_FOLDER=/data -v /data/windoes:/data:Z -p "${PORT}:8081" "$IMAGE_TAG"
+podman run -d --name "$CONTAINER_NAME" --network windoes-net --restart=always --env-file "$ENV_FILE" -e ROOT_FOLDER=/data -v /data/windoes:/data:Z,U -p "${PORT}:8081" "$IMAGE_TAG"
 
 echo "▶ Cleaning old images..."
 podman image prune -f
